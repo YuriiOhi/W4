@@ -7,6 +7,8 @@ TextHandler::TextHandler(const char* filename) : filename(filename) {
     numbersStatistics = new std::map<char, int>();
     specialSymbols = new std::set<char>();
     specialSymbolsStatistics = new std::map<char, int>();
+    words = new std::set<std::string>();
+    wordsStatistics = new std::map<std::string, int>();
     quantity = 0;
 }
 
@@ -17,6 +19,8 @@ TextHandler::~TextHandler() {
     delete numbersStatistics;
     delete specialSymbols;
     delete specialSymbolsStatistics;
+    delete words;
+    delete wordsStatistics;
 }
 
 const std::set<char>& TextHandler::getCharacters() const {
@@ -37,6 +41,13 @@ const std::set<char>& TextHandler::getSpecialSymbols() const {
 const std::map<char, int>& TextHandler::getSpecialSymbolsStatistics() const {
     return *specialSymbolsStatistics;
 }
+const std::set<std::string>& TextHandler::getWords() const {
+    return *words;
+}
+const std::map<std::string, int>& TextHandler::getWordsStatisticks() const {
+    return *wordsStatistics;
+}
+
 long long TextHandler::getQuantity() const {
     return quantity;
 }
@@ -50,6 +61,17 @@ void TextHandler::insert(char symbol, std::map<char, int>* lst) {
         lst->insert(std::pair<char, int>(symbol, 0));
     }
     lst->at(symbol) += 1;
+}
+
+void TextHandler::insert(std::string word, std::set<std::string>* lst) {
+    lst->insert(word);
+}
+
+void TextHandler::insert(std::string word, std::map<std::string, int>* lst) {
+    if ( lst->find(word) == lst->end() ) {
+        lst->insert(std::pair<std::string, int>(word, 0));
+    }
+    lst->at(word) += 1;
 }
 
 bool TextHandler::isLetter(char symbol) {
@@ -114,5 +136,11 @@ std::ostream& operator<<(std::ostream& out, const TextHandler& handler) {
     out << "Unique: " << handler.getSpecialSymbols() << std::endl;
     out << "Matches in text: " << std::endl;
     out << handler.getSpecialSymbolsStatistics() << std::endl;
+
+    out << "Words statistic:" << std::endl;
+    out << "Unique: " << handler.getWords() << std::endl;
+    out << "Matches in text: " << std::endl;
+    out << handler.getWordsStatisticks() << std::endl;
+    
     return out;
 }
