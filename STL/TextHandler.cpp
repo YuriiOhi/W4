@@ -74,6 +74,37 @@ void TextHandler::insert(std::string word, std::map<std::string, int>* lst) {
     lst->at(word) += 1;
 }
 
+void TextHandler::correctWord(std::string& word) {
+    bool repeatingSign = false;
+    int diff = 'a' - 'A';
+    int last = word.size() - 1;
+    
+    for ( int i = 0; i < word.size(); i++ ) {
+        if ( word.at(i) == '\"' || word[i] == 34 ) {
+            word.erase(i, 1);
+        }
+        
+        if ( isLetter(word.at(i)) ) {
+            if ( word.at(i) < 'a' ) {
+                word.at(i) += diff;
+            }
+        }
+        
+        if ( !isAscii(word.at(i)) ) {
+            std::cout << " is not isAscii" << word.at(i) << " ";
+        }
+
+        if ( repeatingSign == false && (word.at(i) == '\'' || word.at(i) == '-' ) ) {
+            repeatingSign = true;
+        } else if ( isSpecial(word.at(i)) && ((word.at(i) != '\'' || word.at(i) != '-' )) ) {
+            repeatingSign = false;
+            word.erase(i, 1);
+        } else {
+            word.erase(remove(word.begin(), word.end(), '\"'), word.end());
+        }
+    }
+}
+
 bool TextHandler::isLetter(char symbol) {
     return ( symbol >= 'A' && symbol <= 'Z' ) || ( symbol >= 'a' && symbol <= 'z' );
 }
@@ -92,10 +123,36 @@ bool TextHandler::isSpecial(char symbol) {
     return special;
 }
 
+bool TextHandler::isCorrectWord(std::string& word) {
+    bool repeatingSign = false;
+
+    for ( unsigned int i = 0; i < word.size(); i++ ) {
+        if ( repeatingSign == false && (word.at(i) == '\'' || word.at(i) == '-' ) ) {
+            repeatingSign = true;
+        } else if ( isSpecial(word.at(i) ) ) {
+            repeatingSign = false;
+            return repeatingSign;
+        }
+    }
+    return repeatingSign;
+}
+
+bool TextHandler::isAscii(char symbol) {
+    int dec = symbol;
+    return dec >= 0 && dec <= 255;
+}
+
 void TextHandler::parseText() {
     std::ifstream file(filename);
     int diff = 'a' - 'A';
     char symbol;
+    std::string word; 
+
+    for ( ; file >> word; ) {
+        correctWord(word);
+        insert(word, words);
+        insert(word, wordsStatistics);
+    }
 
     for ( ; file.get(symbol) ; ) {
         if ( isLetter(symbol) ) {
@@ -141,6 +198,6 @@ std::ostream& operator<<(std::ostream& out, const TextHandler& handler) {
     out << "Unique: " << handler.getWords() << std::endl;
     out << "Matches in text: " << std::endl;
     out << handler.getWordsStatisticks() << std::endl;
-    
+
     return out;
 }
