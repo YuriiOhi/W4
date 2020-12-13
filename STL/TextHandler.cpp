@@ -74,33 +74,19 @@ void TextHandler::insert(std::string word, std::map<std::string, int>* lst) {
     lst->at(word) += 1;
 }
 
-void TextHandler::correctWord(std::string& word) {
+void TextHandler::parseWord(std::string& word) {
     bool repeatingSign = false;
     int diff = 'a' - 'A';
-    int last = word.size() - 1;
-    
-    for ( int i = 0; i < word.size(); i++ ) {
-        if ( word.at(i) == '\"' || word[i] == 34 ) {
-            word.erase(i, 1);
-        }
-        
-        if ( isLetter(word.at(i)) ) {
-            if ( word.at(i) < 'a' ) {
-                word.at(i) += diff;
-            }
-        }
-        
-        if ( !isAscii(word.at(i)) ) {
-            std::cout << " is not isAscii" << word.at(i) << " ";
-        }
 
-        if ( repeatingSign == false && (word.at(i) == '\'' || word.at(i) == '-' ) ) {
+    word.erase(remove(word.begin(), word.end(), '\"'), word.end());
+
+    for ( int i = 0; i < word.size(); i++ ) {
+        if ( repeatingSign == false && (word.at(i) == '\'' || word.at(i) == '-') ) {
             repeatingSign = true;
-        } else if ( isSpecial(word.at(i)) && ((word.at(i) != '\'' || word.at(i) != '-' )) ) {
+        } 
+        if ( isSpecial(word.at(i)) && ((word.at(i) != '\'' || word.at(i) != '-')) ) {
             repeatingSign = false;
             word.erase(i, 1);
-        } else {
-            word.erase(remove(word.begin(), word.end(), '\"'), word.end());
         }
     }
 }
@@ -122,57 +108,35 @@ bool TextHandler::isSpecial(char symbol) {
     }
     return special;
 }
-
-bool TextHandler::isCorrectWord(std::string& word) {
-    bool repeatingSign = false;
-
-    for ( unsigned int i = 0; i < word.size(); i++ ) {
-        if ( repeatingSign == false && (word.at(i) == '\'' || word.at(i) == '-' ) ) {
-            repeatingSign = true;
-        } else if ( isSpecial(word.at(i) ) ) {
-            repeatingSign = false;
-            return repeatingSign;
-        }
-    }
-    return repeatingSign;
-}
-
-bool TextHandler::isAscii(char symbol) {
-    int dec = symbol;
-    return dec >= 0 && dec <= 255;
-}
-
 void TextHandler::parseText() {
     std::ifstream file(filename);
     int diff = 'a' - 'A';
-    char symbol;
-    std::string word; 
+    std::string word;
 
     for ( ; file >> word; ) {
-        correctWord(word);
+        for ( int i = 0; i < word.size(); i++ ) {
+            if ( isLetter(word.at(i)) ) {
+                if ( word.at(i) < 'a' ) {
+                    word.at(i) += diff;
+                }
+                insert(word.at(i), characters);
+                insert(word.at(i), charactersStatistics);
+                quantity += 1;
+            }
+            if ( isNumber(word.at(i)) ) {
+                insert(word.at(i), numbers);
+                insert(word.at(i), numbersStatistics);
+                quantity += 1;
+            }
+            if ( isSpecial(word.at(i)) ) {
+                insert(word.at(i), specialSymbols);
+                insert(word.at(i), specialSymbolsStatistics);
+                quantity += 1;
+            }
+        }
+        parseWord(word);
         insert(word, words);
         insert(word, wordsStatistics);
-    }
-
-    for ( ; file.get(symbol) ; ) {
-        if ( isLetter(symbol) ) {
-            if ( symbol < 'a' ) {
-                symbol += diff;
-            }
-            insert(symbol, characters);
-            insert(symbol, charactersStatistics);
-            quantity += 1;
-        }
-        if ( isNumber(symbol) ) {
-            insert(symbol, numbers);
-            insert(symbol, numbersStatistics);
-            quantity += 1;
-        }
-        if ( isSpecial(symbol) ) {
-            insert(symbol, specialSymbols);
-            insert(symbol, specialSymbolsStatistics);
-            quantity += 1;
-        }
     }
     file.close();
 }

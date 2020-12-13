@@ -8,6 +8,7 @@
 #include "templates.cpp"
 #include <string>
 
+
 class TextHandler {
     private:
         const char* filename;
@@ -25,12 +26,10 @@ class TextHandler {
         void insert(char symbol, std::map<char, int>* lst);
         void insert(std::string word, std::set<std::string>* lst);
         void insert(std::string word, std::map<std::string, int>* lst);
-        void correctWord(std::string& word);
+        void parseWord(std::string& word);
         bool isLetter(char symbol);
         bool isNumber(char symbol);
         bool isSpecial(char symbol);
-        bool isCorrectWord(std::string& word);
-        bool isAscii(char symbol);
     public:
         TextHandler(const char* filename);
         ~TextHandler();
