@@ -10,6 +10,7 @@ TextHandler::TextHandler(const char* filename) : filename(filename) {
     words = new std::set<std::string>();
     wordsStatistics = new std::map<std::string, int>();
     quantity = 0;
+    wordsQuantity = 0;
 }
 
 TextHandler::~TextHandler() {
@@ -52,6 +53,10 @@ long long TextHandler::getQuantity() const {
     return quantity;
 }
 
+long long TextHandler::getWordsQuantity() const {
+    return wordsQuantity;
+}
+
 void TextHandler::insert(char symbol, std::set<char>* lst) {
     lst->insert(symbol);
 }
@@ -74,23 +79,28 @@ void TextHandler::insert(std::string word, std::map<std::string, int>* lst) {
     lst->at(word) += 1;
 }
 
-void TextHandler::parseWord(std::string& word) {
+void TextHandler::parseWord(std::string& word, char symbol) {
     bool repeatingSign = false;
-    int diff = 'a' - 'A';
 
-    word.erase(remove(word.begin(), word.end(), '\"'), word.end());
+    if ( isLetter(symbol) ) {
+        word.push_back(symbol);
+    }
 
-    for ( int i = 0; i < word.size(); i++ ) {
-        if ( repeatingSign == false && (word.at(i) == '\'' || word.at(i) == '-') ) {
-            repeatingSign = true;
-        } 
-        if ( isSpecial(word.at(i)) && ((word.at(i) != '\'' || word.at(i) != '-')) ) {
-            repeatingSign = false;
-            word.erase(i, 1);
-        }
+    if ( repeatingSign == false && (isApostrophe(symbol) || isDash(symbol)) ) {
+        repeatingSign = true;
+        word.push_back(symbol);
     }
 }
 
+bool TextHandler::isApostrophe(char symbol) {
+    return symbol == '\'';
+}
+bool TextHandler::isSpace(char symbol) {
+    return std::isspace(static_cast<unsigned char>(symbol));
+}
+bool TextHandler::isDash(char symbol) {
+    return symbol == '-';
+}
 bool TextHandler::isLetter(char symbol) {
     return ( symbol >= 'A' && symbol <= 'Z' ) || ( symbol >= 'a' && symbol <= 'z' );
 }
@@ -108,35 +118,45 @@ bool TextHandler::isSpecial(char symbol) {
     }
     return special;
 }
+
+bool TextHandler::isWord(std::string& word) {
+    return word.size() > 0;
+} 
+
 void TextHandler::parseText() {
     std::ifstream file(filename);
     int diff = 'a' - 'A';
-    std::string word;
+    char symbol;
+    std::string word = "";
 
-    for ( ; file >> word; ) {
-        for ( int i = 0; i < word.size(); i++ ) {
-            if ( isLetter(word.at(i)) ) {
-                if ( word.at(i) < 'a' ) {
-                    word.at(i) += diff;
-                }
-                insert(word.at(i), characters);
-                insert(word.at(i), charactersStatistics);
-                quantity += 1;
+    for ( ; file.get(symbol); ) {
+        if ( isLetter(symbol) ) {
+            if ( symbol < 'a' ) {
+                symbol += diff;
             }
-            if ( isNumber(word.at(i)) ) {
-                insert(word.at(i), numbers);
-                insert(word.at(i), numbersStatistics);
-                quantity += 1;
-            }
-            if ( isSpecial(word.at(i)) ) {
-                insert(word.at(i), specialSymbols);
-                insert(word.at(i), specialSymbolsStatistics);
-                quantity += 1;
-            }
+            insert(symbol, characters);
+            insert(symbol, charactersStatistics);
+            quantity += 1;
         }
-        parseWord(word);
-        insert(word, words);
-        insert(word, wordsStatistics);
+        if ( isNumber(symbol) ) {
+            insert(symbol, numbers);
+            insert(symbol, numbersStatistics);
+            quantity += 1;
+        }
+        if ( isSpecial(symbol) ) {
+            insert(symbol, specialSymbols);
+            insert(symbol, specialSymbolsStatistics);
+            quantity += 1;
+        }
+
+        parseWord(word, symbol);
+
+        if ( isWord(word) && (isSpace(symbol)) ) {
+            insert(word, words);
+            insert(word, wordsStatistics);
+            wordsQuantity += 1;
+            word = "";
+        }
     }
     file.close();
 }
@@ -158,6 +178,7 @@ std::ostream& operator<<(std::ostream& out, const TextHandler& handler) {
     out << "Matches in text: " << std::endl;
     out << handler.getSpecialSymbolsStatistics() << std::endl;
 
+    out << "Words found: " << handler.getWordsQuantity() << std::endl;
     out << "Words statistic:" << std::endl;
     out << "Unique: " << handler.getWords() << std::endl;
     out << "Matches in text: " << std::endl;

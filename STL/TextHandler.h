@@ -7,6 +7,7 @@
 #include <map>
 #include "templates.cpp"
 #include <string>
+#include <cctype>
 
 
 class TextHandler {
@@ -21,15 +22,20 @@ class TextHandler {
         std::set<std::string>* words;
         std::map<std::string, int>* wordsStatistics;
         long long quantity;
+        long long wordsQuantity;
 
         void insert(char symbol, std::set<char>* lst);
         void insert(char symbol, std::map<char, int>* lst);
         void insert(std::string word, std::set<std::string>* lst);
         void insert(std::string word, std::map<std::string, int>* lst);
-        void parseWord(std::string& word);
+        void parseWord(std::string& word, char symbol);
         bool isLetter(char symbol);
         bool isNumber(char symbol);
+        bool isApostrophe(char symbol);
+        bool isSpace(char symbol);
+        bool isDash(char symbol);
         bool isSpecial(char symbol);
+        bool isWord(std::string& word);
     public:
         TextHandler(const char* filename);
         ~TextHandler();
@@ -43,6 +49,7 @@ class TextHandler {
         const std::set<std::string>& getWords() const;
         const std::map<std::string, int>& getWordsStatisticks() const;
         long long getQuantity() const;
+        long long getWordsQuantity() const;
 
         void parseText();
 };
