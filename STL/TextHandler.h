@@ -7,8 +7,7 @@
 #include <map>
 #include "templates.cpp"
 #include <string>
-#include <cctype>
-
+#include <cctype>//for std::isSpace()
 
 class TextHandler {
     private:

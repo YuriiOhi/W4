@@ -85,7 +85,6 @@ void TextHandler::parseWord(std::string& word, char symbol) {
     if ( isLetter(symbol) ) {
         word.push_back(symbol);
     }
-
     if ( repeatingSign == false && (isApostrophe(symbol) || isDash(symbol)) ) {
         repeatingSign = true;
         word.push_back(symbol);
@@ -118,7 +117,6 @@ bool TextHandler::isSpecial(char symbol) {
     }
     return special;
 }
-
 bool TextHandler::isWord(std::string& word) {
     return word.size() > 0;
 } 
