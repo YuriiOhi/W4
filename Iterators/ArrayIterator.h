@@ -5,21 +5,25 @@
 #include <iostream>
 #include <string>
 
-class BelowZeroException {};
 class OutOfRangeException {};
 
 template <class T>
 class ArrayIterator {
     private:
-    	T *array;
+    	const T *array;
+        T currentValue;
         int size;
-        int current;
+        int index;
+        int last;
+        
+        void updateValue() {
+            currentValue = array[index];
+        }
 
     public:
-        ArrayIterator(T source[], int size);
+        ArrayIterator(const T* sourceArray, int size);
         ~ArrayIterator();
         void reloadIterator();
-        void jumpTo(int element);
         void previous();
         void next();
         void operator++();
@@ -27,9 +31,9 @@ class ArrayIterator {
         void operator--();
         void operator--(int);
         bool over();
-        int getValueOf(int element);
         int value();
         int operator*();
+        int getIndex();
 };
 
 #endif // ARRAY_ITERATOR_H

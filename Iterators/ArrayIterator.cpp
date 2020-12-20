@@ -1,47 +1,51 @@
 #include "ArrayIterator.h"
 
 template <class T> 
-ArrayIterator<T>::ArrayIterator(T source[], int size) {
-	this->array = new T[size];
-	this->size = size;
-	this->current = 0;
-
-	for ( int i = 0; i < size; i++ ) {
-		this->array[i] = source[i];
+ArrayIterator<T>::ArrayIterator(const T* sourceArray, int size) {
+	if ( size < 0 ) {
+		throw OutOfRangeException();
 	}
+	this->array = sourceArray;
+	this->size = size;
+	this->index = 0;
+	this->last = size - 1;
+	this->currentValue = array[index];
 }
 
 template <class T> 
 ArrayIterator<T>::~ArrayIterator() {
-	delete[](this->array);
+	this->array = NULL;
+	this->size = 0;
+	this->index = 0;
+	this->last = 0;
+	this->currentValue = 0;
+	delete array;
 }
 
 template <class T> 
 void ArrayIterator<T>::reloadIterator() {
-	this->current = 0;
-}
-
-template <class T> 
-void ArrayIterator<T>::jumpTo(int element) {
-	this->current = element;
+	this->index = 0;
+	updateValue();
 }
 
 template <class T> 
 void ArrayIterator<T>::previous() {
-    if ( current < 0 ) { // проверка чтобы не выскочить за границу
-    	std::cout << "You are at the beginning!" << std::endl;
-        return;
+    if ( index <= 0 ) {// проверка чтобы не выскочить за границу
+    	std::cout << "ERROR: You will get out of range!" << std::endl;
+    	return;
     }
-    current -= 1;
-}
+    index -= 1;
+   	updateValue();
+}   	
 
 template <class T> 
 void ArrayIterator<T>::next() {
     if ( over() ) { // проверка чтобы не выскочить за границу
-    	std::cout << "The sequence is over!" << std::endl;
-        return;
-    }
-    current += 1;
+   		std::cout << "ERROR: You will get out of range!" << std::endl;
+    	return;
+    } 
+  	index += 1;
+   	updateValue(); 
 }
 
 template <class T> 
@@ -57,24 +61,18 @@ template <class T>
 void ArrayIterator<T>::operator--(int) { operator--(); }//post increment
 
 template <class T> 
-bool ArrayIterator<T>::over() { return current > size; }
-
+bool ArrayIterator<T>::over() {
+	return index > last;
+}
 template <class T> 
-int ArrayIterator<T>::value() { return array[current]; }
+int ArrayIterator<T>::getIndex() {
+    return index;
+}
+template <class T> 
+int ArrayIterator<T>::value() { return array[index]; }
 
 template <class T> 
 int ArrayIterator<T>::operator*() { return value(); }
-
-template <class T> 
-int ArrayIterator<T>::getValueOf(int element) {
-	int last = size - 1;
-	if ( element > last ) {
-		throw OutOfRangeException();
-	} else if ( element < 0 ) {
-		throw BelowZeroException();
-	} 
-	return array[element];
-}
 
 template class ArrayIterator<int>; // explicit instantiation
 template class ArrayIterator<bool>;
