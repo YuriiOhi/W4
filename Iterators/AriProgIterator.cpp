@@ -1,4 +1,4 @@
-#include "AriProgIterator.h"
+T#include "AriProgIterator.h"
 using namespace std;
 
 template <class T> 
@@ -57,7 +57,7 @@ bool AriProgIterator<T>::over() {
 }
 
 template <class T> 
-int AriProgIterator<T>::value() {
+T AriProgIterator<T>::value() {
     if ( over() ) { // проверка чтобы не выскочить за границу
         cout << "ERROR: Out of range!" << endl; 
     } 
@@ -65,7 +65,7 @@ int AriProgIterator<T>::value() {
 }
 
 template <class T> 
-int AriProgIterator<T>::getIndex() {
+T AriProgIterator<T>::getIndex() {
     if ( over() ) { // проверка чтобы не выскочить за границу
         throw OutOfRangeException();
     } 
@@ -73,7 +73,7 @@ int AriProgIterator<T>::getIndex() {
 }
 
 template <class T> 
-int AriProgIterator<T>::operator*() { return value(); }
+T AriProgIterator<T>::operator*() { return value(); }
 
 template class AriProgIterator<int>; // explicit instantiation
 template class AriProgIterator<bool>;

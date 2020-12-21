@@ -55,7 +55,7 @@ template <class T>
 bool GeoProgIterator<T>::over() { return power < 0 || power > length; }
 
 template <class T> 
-int GeoProgIterator<T>::value() {
+T GeoProgIterator<T>::value() {
    if ( over() ) { // проверка чтобы не выскочить за границу
         std::cout << "ERROR: Out of range!" << std::endl;
         throw OutOfSequenceRangeException();
@@ -64,10 +64,10 @@ int GeoProgIterator<T>::value() {
     return current;
 }
 template <class T> 
-int GeoProgIterator<T>::getIndex() { return index; }
+T GeoProgIterator<T>::getIndex() { return index; }
 
 template <class T> 
-int GeoProgIterator<T>::operator*() { return value(); }
+T GeoProgIterator<T>::operator*() { return value(); }
 
 template class GeoProgIterator<int>; // explicit instantiation
 template class GeoProgIterator<bool>;

@@ -31,9 +31,9 @@ class ArrayIterator {
         void operator--();
         void operator--(int);
         bool over();
-        int value();
-        int operator*();
-        int getIndex();
+        T value();
+        T operator*();
+        T getIndex();
 };
 
 #endif // ARRAY_ITERATOR_H

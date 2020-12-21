@@ -5,7 +5,6 @@
 #include <iostream>
 #include <cmath>
 
-
 class OutOfSequenceRangeException {};
 
 template <class T>
@@ -33,9 +32,9 @@ class GeoProgIterator {
         void operator--();
         void operator--(int);
         bool over();
-        int value();
-        int getIndex();
-        int operator*();
+        T value();
+        T getIndex();
+        T operator*();
 };
 
 #endif // GEO_PROG__ITERATOR_H

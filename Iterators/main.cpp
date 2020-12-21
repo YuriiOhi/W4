@@ -1,35 +1,45 @@
 #include <iostream>
-#include "GeoProgIterator.h"
+#include "FactorialIterator.h"
 
 using namespace std;
 
 int main() {
- GeoProgIterator<int> seq(10, 4, 10);
- 	seq--;
- 	seq.getIndex();
+ 	FactorialIterator<long int> seq(0, 10);
+	cout << "Value " << seq.value() << endl;
+	 seq--;
+	 	 cout << "Value " << seq.value() << endl;
+
 	for ( ; !seq.over(); seq++ ) {
         cout << *seq << endl;
     }
-	seq--;
- 	seq.getIndex();
-	try {
-		++seq;
-	} catch (OutOfSequenceRangeException e) {
-		std::cout << "OutOfSequenceRangeException" << std::endl;
-	}
-	cout << "2: " << seq.value() << endl;
+ //    seq--;
+	 cout << "Value " << seq.value() << endl;
+ // seq--;
+	// cout << "Value " << seq.value() << endl;
+ // seq--;
+	// cout << "Value " << seq.value() << endl;
+ // seq--;
+	// cout << "Value " << seq.value() << endl;
+ // seq--;
+	// cout << "Value " << seq.value() << endl;
 
-	seq++;
-	cout << "3: " << seq.value() << endl;
-	try {
-		seq.value();
-	} catch (OutOfSequenceRangeException e) {
-		std::cout << "OutOfSequenceRangeException" << std::endl;
-	}
-	seq.reloadIterator();
-	cout << "5: " << seq.value() << endl;
-	seq++;
-	cout << "6: " << seq.value() << endl;
+	// seq--;
+	// try {
+	// 	++seq;
+	// } catch (OutOfSequenceRangeException e) {
+	// 	std::cout << "OutOfSequenceRangeException" << std::endl;
+	// }
+	// cout << "2: " << seq.value() << endl;
+
+	// try {
+	// 	seq.value();
+	// } catch (OutOfSequenceRangeException e) {
+	// 	std::cout << "OutOfSequenceRangeException" << std::endl;
+	// }
+	// seq.reloadIterator();
+	// cout << "5: " << seq.value() << endl;
+	// seq++;
+	// cout << "6: " << seq.value() << endl;
 
 	return 0;
 }
@@ -122,33 +132,32 @@ int main() {
 //=======================================================//=======================================================
 
 
+// GeoProgIterator<int> seq(10, 4, 10);
+//  	seq--;
+//  	seq.getIndex();
+// 	for ( ; !seq.over(); seq++ ) {
+//         cout << *seq << endl;
+//     }
+// 	seq--;
+//  	seq.getIndex();
+// 	try {
+// 		++seq;
+// 	} catch (OutOfSequenceRangeException e) {
+// 		std::cout << "OutOfSequenceRangeException" << std::endl;
+// 	}
+// 	cout << "2: " << seq.value() << endl;
 
- // GeoProgIterator<int> seq(10, 4, 10);
-	// for ( ; !seq.over(); seq++ ) {
- //        cout << *seq << endl;
- //    }
-	// cout << "1: " << seq.value() << endl;
-
-	// try {
-	// 	++seq;
-	// } catch (OutOfSequenceRangeException e) {
-	// 	std::cout << "OutOfSequenceRangeException" << std::endl;
-	// }
-	// cout << "2: " << seq.value() << endl;
-
-	// seq++;
-	// cout << "3: " << seq.value() << endl;
-	// try {
-	// 	seq.value();
-	// } catch (OutOfSequenceRangeException e) {
-	// 	std::cout << "OutOfSequenceRangeException" << std::endl;
-	// }
-	// seq.reloadIterator();
-	// cout << "5: " << seq.value() << endl;
-	// seq++;
-	// cout << "6: " << seq.value() << endl;
-
-
+// 	seq++;
+// 	cout << "3: " << seq.value() << endl;
+// 	try {
+// 		seq.value();
+// 	} catch (OutOfSequenceRangeException e) {
+// 		std::cout << "OutOfSequenceRangeException" << std::endl;
+// 	}
+// 	seq.reloadIterator();
+// 	cout << "5: " << seq.value() << endl;
+// 	seq++;
+// 	cout << "6: " << seq.value() << endl;
 //=======================================================//=======================================================
 
 

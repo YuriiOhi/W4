@@ -1,23 +1,27 @@
 #pragma once
-#ifndef ARI_PROG_ITERATOR_H
-#define ARI_PROG_ITERATOR_H
+#ifndef FACTORIAL_ITERATOR_H
+#define FACTORIAL_ITERATOR_H
 
 #include <iostream>
+#include <cmath>
 
 class OutOfRangeException {};
 
 template <class T>
-class AriProgIterator {
+class FactorialIterator {
     private:
-        T member;
-        T step;
-        T length;
-        T current;  
-        int index;
+        T initial;
+        T number;
+        T limit;
+        T factorial;
+
+        void calculateFactorial() {
+            factorial *= number;
+        }
 
     public:
-        AriProgIterator( T member, T step, T length);
-        ~AriProgIterator();
+        FactorialIterator(T number, T limit);
+        ~FactorialIterator();
         void reloadIterator();
         void previous();
         void next();
@@ -27,8 +31,7 @@ class AriProgIterator {
         void operator--(int);
         bool over();
         T value();
-        T getIndex();
         T operator*();
 };
 
-#endif // ARI_PROG__ITERATOR_H
+#endif // FACTORIAL_ITERATOR_H

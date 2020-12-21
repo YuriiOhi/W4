@@ -1,4 +1,4 @@
-#include "ArrayIterator.h"
+T#include "ArrayIterator.h"
 
 template <class T> 
 ArrayIterator<T>::ArrayIterator(const T* sourceArray, int size) {
@@ -65,14 +65,14 @@ bool ArrayIterator<T>::over() {
 	return index > last;
 }
 template <class T> 
-int ArrayIterator<T>::getIndex() {
+T ArrayIterator<T>::getIndex() {
     return index;
 }
 template <class T> 
-int ArrayIterator<T>::value() { return array[index]; }
+T ArrayIterator<T>::value() { return array[index]; }
 
 template <class T> 
-int ArrayIterator<T>::operator*() { return value(); }
+T ArrayIterator<T>::operator*() { return value(); }
 
 template class ArrayIterator<int>; // explicit instantiation
 template class ArrayIterator<bool>;
