@@ -2,6 +2,9 @@
 
 template <class T> 
 FactorialIterator<T>::FactorialIterator(T number, T limit) {
+        if ( limit < 0 ) {
+            throw OutOfRangeException();
+        }
         if ( number < 0 ) {
             throw OutOfRangeException();
         }
@@ -57,7 +60,13 @@ template <class T>
 bool FactorialIterator<T>::over() { return number > limit; }
 
 template <class T> 
-T FactorialIterator<T>::value() { return factorial; }
+T FactorialIterator<T>::value() {
+    if ( over() ) {
+        std::cout << "ERROR: You are out of range!" << std::endl;
+        throw OutOfRangeException();
+    } 
+    return factorial;
+}
 
 template <class T> 
 T FactorialIterator<T>::operator*() { return value(); }

@@ -1,26 +1,21 @@
 #pragma once
-#ifndef FACTORIAL_ITERATOR_H
-#define FACTORIAL_ITERATOR_H
+#ifndef PRIME_NUM_ITERATOR_H
+#define PRIME_NUM_ITERATOR_H
 
 #include <iostream>
 
 class OutOfRangeException {};
 
 template <class T>
-class FactorialIterator {
+class PrimeNumIterator {
     private:
-        T initial;
-        T number;
+        T* arrayPrime;
         T limit;
-        T factorial;
-
-        void calculateFactorial() {
-            factorial *= number;
-        }
+        int index;
 
     public:
-        FactorialIterator(T number, T limit);
-        ~FactorialIterator();
+        PrimeNumIterator(T limit);
+        ~PrimeNumIterator();
         void reloadIterator();
         void previous();
         void next();
@@ -33,4 +28,4 @@ class FactorialIterator {
         T operator*();
 };
 
-#endif // FACTORIAL_ITERATOR_H
+#endif // PRIME_NUM_ITERATOR_H

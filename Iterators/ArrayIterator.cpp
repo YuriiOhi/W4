@@ -66,10 +66,17 @@ bool ArrayIterator<T>::over() {
 }
 template <class T> 
 T ArrayIterator<T>::getIndex() {
+	if ( over() ) { // проверка чтобы не выскочить за границу
+   		throw OutOfRangeException();
+    }
     return index;
 }
 template <class T> 
-T ArrayIterator<T>::value() { return array[index]; }
+T ArrayIterator<T>::value() { 
+	if ( over() ) { // проверка чтобы не выскочить за границу
+   		throw OutOfRangeException();
+    }
+    return array[index]; }
 
 template <class T> 
 T ArrayIterator<T>::operator*() { return value(); }

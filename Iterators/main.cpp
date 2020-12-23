@@ -1,19 +1,42 @@
 #include <iostream>
-#include "FactorialIterator.h"
+#include "PrimeNumIterator.h"
 
 using namespace std;
 
 int main() {
- 	FactorialIterator<long int> seq(0, 10);
-	cout << "Value " << seq.value() << endl;
-	 seq--;
-	 	 cout << "Value " << seq.value() << endl;
-
+	PrimeNumIterator<int> seq(0);
+	
 	for ( ; !seq.over(); seq++ ) {
         cout << *seq << endl;
     }
+
+	return 0;
+}
+//=======================================================//=======================================================
+
+
+// FibonacciIterator<int> seq(0);
+	// for ( ; !seq.over(); seq++ ) {
+	//     cout << *seq << endl;
+	// }
+	// // seq.reloadIterator();
+	// // for ( ; !seq.over(); seq++ ) {
+	// //     cout << *seq << endl;
+	// // }
+	// // cout << "Value " << seq.value() << endl;
+//=======================================================//=======================================================
+
+
+// 	FactorialIterator<long int> seq(0, 10);
+	// cout << "Value " << seq.value() << endl;
+	//  seq--;
+	//  	 cout << "Value " << seq.value() << endl;
+
+	// for ( ; !seq.over(); seq++ ) {
+ //        cout << *seq << endl;
+ //    }
  //    seq--;
-	 cout << "Value " << seq.value() << endl;
+//	 cout << "Value " << seq.value() << endl;
  // seq--;
 	// cout << "Value " << seq.value() << endl;
  // seq--;
@@ -40,9 +63,6 @@ int main() {
 	// cout << "5: " << seq.value() << endl;
 	// seq++;
 	// cout << "6: " << seq.value() << endl;
-
-	return 0;
-}
 
 
 //=======================================================//=======================================================

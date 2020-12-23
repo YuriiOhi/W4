@@ -59,7 +59,8 @@ bool AriProgIterator<T>::over() {
 template <class T> 
 T AriProgIterator<T>::value() {
     if ( over() ) { // проверка чтобы не выскочить за границу
-        cout << "ERROR: Out of range!" << endl; 
+        cout << "ERROR: Out of range!" << endl;
+        throw OutOfRangeException();
     } 
     return current;
 }
