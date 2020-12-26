@@ -1,14 +1,83 @@
 #include <iostream>
 #include "PrimeNumIterator.h"
+#include <cmath>
 
 using namespace std;
 
 int main() {
-	PrimeNumIterator<int> seq(0);
-	
+	PrimeNumIterator<int> seq(10);
+
 	for ( ; !seq.over(); seq++ ) {
         cout << *seq << endl;
     }
+	// cout << "Value " << seq.value() << endl;
+	//  seq++;
+	//  seq.printSize();
+
+	// cout << "Value " << seq.value() << endl;
+	// seq++;
+	// seq.printSize();
+
+	// cout << "Value " << seq.value() << endl;
+	// seq++;
+	// seq.printSize();
+
+	// cout << "Value " << seq.value() << endl;
+	// seq++;
+	// seq.printSize();
+	// cout << "Value " << seq.value() << endl;
+	// seq.printSize();
+
+
+
+	// cout << "Value " << seq.value() << endl;
+	//  seq++;
+	//  seq.printSize();
+
+	// cout << "Value " << seq.value() << endl;
+	// seq++;
+	// seq.printSize();
+
+	// cout << "Value " << seq.value() << endl;
+	// seq++;
+	// seq.printSize();
+
+	// cout << "Value " << seq.value() << endl;
+	// seq++;
+	// seq.printSize();
+
+	// cout << "Value " << seq.value() << endl;
+	// seq++;
+	// seq.printSize();
+
+	// cout << "Value " << seq.value() << endl;
+	// seq++;
+	// seq.printSize();
+
+	// seq--;
+	// cout << "Value " << seq.value() << endl;
+	// seq--;
+	// cout << "Value " << seq.value() << endl;
+	// seq--;
+	// cout << "Value " << seq.value() << endl;
+	// seq--;
+	// cout << "Value " << seq.value() << endl;
+
+	// cout << "Value " << seq.value() << endl;
+	// seq++;
+	// seq.printSize();
+
+	// cout << "Value " << seq.value() << endl;
+	// seq++;
+	// seq.printSize();
+
+		// seq++;
+	// cout << "Value " << seq.value() << endl;
+	// seq++;
+	// cout << "Value " << seq.value() << endl;
+	// seq.reloadIterator();
+	// cout << "Value " << seq.value() << endl;
+
 
 	return 0;
 }
