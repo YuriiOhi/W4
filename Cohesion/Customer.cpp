@@ -15,6 +15,7 @@ Customer::~Customer() {
     std::cout << "Destructing Customer object: " << this->getName() << std::endl;
     std::set<Order*>::iterator it = this->orders.begin();
     for ( ; it != this->orders.end(); ++it ) {
+        std::cout << "Destructing Customer object: " << this->getName() << std::endl; 
         delete(*it);
     }
     orders.clear();
@@ -29,9 +30,12 @@ const char* Customer::getName() const {
     return this->nameSurname;
 }
 
-
 const std::set<Order*>& Customer::getAllOrders() const {
 	return (this->orders);
+}
+
+const std::list<Customer*>& Customer::getAllCustomers() const {
+    return (this->customers);
 }
 
 void Customer::addNewOrder(Order* newOrder) {

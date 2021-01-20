@@ -13,7 +13,7 @@ class Category {
         static int lastId;
         int categoryId;
         const char* title;
-        std::list<Item*> catItems;
+        std::set<Item*> catItems;
     public:
         static std::list<Category*> categories;
     public:
@@ -21,11 +21,11 @@ class Category {
         virtual ~Category();
 
         const char* getTitle() const;
-        const std::list<Item*>& getItems() const;
+        const std::set<Item*>& getItems() const;
+        const std::list<Category*>& getCategories() const;
         void setTitle(const char* title);
         void addItemToCategory(Item* item);
         void removeItemFromCategory(Item* item);
-        int catItemsSize();
 };
 
 std::ostream& operator<<(std::ostream& out, const Category& category) ;

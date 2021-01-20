@@ -1,15 +1,50 @@
 #include <iostream>
-#include "PrimeNumIterator.h"
-#include <cmath>
+#include "FibonacciIterator.h"
+#include <string>
 
 using namespace std;
 
-int main() {
-	PrimeNumIterator<int> seq(10);
 
+int main() {
+	FibonacciIterator<int> seq(5);
 	for ( ; !seq.over(); seq++ ) {
-        cout << *seq << endl;
-    }
+	    cout << *seq << endl;
+	}
+	for ( ; !seq.begin(); seq-- ) {
+	    cout << *seq << endl;
+	}
+
+//         cout << *seq << endl;
+
+
+	// seq.reloadIterator();
+	// for ( ; !seq.over(); seq++ ) {
+	//     cout << *seq << endl;
+	// // }
+	// AriProgIterator<int> seq(12, 2, 4);
+
+	// for ( ; !seq.over(); seq++ ) {
+ //        cout << *seq << endl;
+ //    }
+
+
+ //    for ( ; ! ( *seq <= 1 ); seq-- ) {
+ //        cout << *seq << endl;
+ //    }
+    
+	return 0;
+}
+//=======================================================//=======================================================
+
+
+	// FileIterator<std::string> seq("task.in");
+
+	// for ( ; !seq.over(); seq++ ) {
+ //        cout << seq.value() << endl;
+ //    }
+
+    //seq.printAll();
+
 	// cout << "Value " << seq.value() << endl;
 	//  seq++;
 	//  seq.printSize();
@@ -79,8 +114,6 @@ int main() {
 	// cout << "Value " << seq.value() << endl;
 
 
-	return 0;
-}
 //=======================================================//=======================================================
 
 

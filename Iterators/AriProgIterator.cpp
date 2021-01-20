@@ -1,4 +1,4 @@
-T#include "AriProgIterator.h"
+#include "AriProgIterator.h"
 using namespace std;
 
 template <class T> 

@@ -21,7 +21,7 @@ class Order {
     public:
         static std::list<Order*> orders;
     public:
-        Order(Customer& customer, Item& item);
+        Order(Customer* customer, Item* item);
         virtual ~Order();
 
        	const int getId() const;

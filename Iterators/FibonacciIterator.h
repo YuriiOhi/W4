@@ -3,25 +3,28 @@
 #define FIBONACCI_ITERATOR_H
 
 #include <iostream>
+#include <vector>
 
 class OutOfRangeException {};
 
 template <class T>
 class FibonacciIterator {
     private:
-        T* array;
+        std::vector<T>* fibSequence;
         T limit;
         T currentNumber;
         T previousNumber;
         T fibonacci;
         int index;
         bool negaFibonacci;
+        bool isOver;
+        bool isFull;
 
-        T calculateFibonacci() {
+        void calculateFibonacci() {
             fibonacci = currentNumber + previousNumber;
             previousNumber = currentNumber;
             currentNumber = fibonacci;
-            return fibonacci;
+            fibSequence->push_back(fibonacci);
         }
 
     public:
@@ -34,6 +37,7 @@ class FibonacciIterator {
         void operator++(int);
         void operator--();
         void operator--(int);
+        bool begin();
         bool over();
         T value();
         T operator*();

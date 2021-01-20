@@ -25,6 +25,7 @@ class Customer {
         const char* getName() const;
        	const int getId() const;
 		const std::set<Order*>& getAllOrders() const;
+        const std::list<Customer*>& getAllCustomers() const;
         void addNewOrder(Order* newOrder);
 };
 
@@ -40,4 +41,3 @@ std::ostream& operator<<(std::ostream& out, const Customer& object);
 //Следим за именами методов. Не забываем геттеры. Продумываем логику.
 //
 //Бонус: добавить уникальные идентификаторы для каждого класса.
-

@@ -15,22 +15,20 @@ FibonacciIterator<T>::FibonacciIterator(T limit) {
     if ( limit > 46 ) {
         throw OutOfRangeException();
     }
-    this->array = new T[limit];
+    this->isOver = false;
+    this->isFull = false;
+    this->fibSequence = new std::vector<T>();
     this->fibonacci = ZERO;
     this->index = ZERO;
-    this->limit = limit;
+    this->limit = limit - 1;
     this->currentNumber = ZERO;
     this->previousNumber = 1;
-    this->array[ZERO] = ZERO;
-   
-    for ( int i = 1; i <= limit; i++ ) {
-        this->array[i] = calculateFibonacci();
-    }
+    this->fibSequence->push_back(ZERO);
 }
 
 template <class T>
 FibonacciIterator<T>::~FibonacciIterator() {
-    delete[]this->array;
+    fibSequence->clear();
 }
 
 template <class T>
@@ -40,9 +38,11 @@ void FibonacciIterator<T>::reloadIterator() {
 
 template <class T>
 void FibonacciIterator<T>::previous() {
-    if ( index <= ZERO ) {
-        std::cout << "ERROR: You will get out of range!" << std::endl;
+    if ( begin() ) {
         return;
+    }
+    if ( over() && index == limit ) {
+        isOver = false;
     }
     this->index -= 1;
 }
@@ -50,10 +50,20 @@ void FibonacciIterator<T>::previous() {
 template <class T>
 void FibonacciIterator<T>::next() {
     if ( over() ) { // проверка чтобы не выскочить за границу
-        std::cout << "ERROR: You will get out of range!" << std::endl;
         return;
     }
-    this->index += 1;
+    if ( index >= limit ) {
+        calculateFibonacci();
+        isOver = true;
+        isFull = true;
+        return;
+    }
+    if ( !isFull ) {
+        this->index += 1;
+        calculateFibonacci();
+    } else {
+        this->index += 1;
+    }
 }
 
 template <class T>
@@ -70,17 +80,25 @@ void FibonacciIterator<T>::operator--(int) { operator--(); }
 
 template <class T>
 bool FibonacciIterator<T>::over() {
-    return index > limit;
+    if ( isOver ) {
+        return true;
+    }
+    return false;
+}
+
+template <class T>
+bool FibonacciIterator<T>::begin() {
+    if ( index < 0 ) {
+        reloadIterator();
+        return true;
+    }
+    return false;
 }
 
 template <class T>
 T FibonacciIterator<T>::value() {
-    T result = array[index];
+    T result = fibSequence->at(index);
 
-    if ( over() ) {
-        std::cout << "ERROR: You are out of range!" << std::endl;
-        throw OutOfRangeException();
-    }
     if ( negaFibonacci == true && index % 2 == ZERO ) {
         result *= -1;
     } 

@@ -9,7 +9,7 @@ Item::Item(const char* title, Category* category) : title(title), category(categ
     this->category->addItemToCategory(this);
 }
 Item::~Item() {
-    std::cout << "Destructing Item object: " << this->getTitle() << std::endl;
+    std::cout << "Destructing Item object: " << this->getTitle()<< std::endl;
     category->removeItemFromCategory(this);
     itemsSet.erase(this);
 }
@@ -28,6 +28,9 @@ void Item::setTitle(const char* title) {
 
 const std::list<Order*>& Item::getOrders() const {
    return order->orders;
+}
+void Item::printOrders() {
+    std::cout << this->order->orders << std:: endl;
 }
 void Item::addItem(Item* item) {
     this->itemsSet.insert(item);

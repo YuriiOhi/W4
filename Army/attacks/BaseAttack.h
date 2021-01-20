@@ -2,10 +2,10 @@
 #define BASEATTACK_H
 
 #include <iostream>
-#include "Unit.h"
+#include "../config.h"
+#include "../units/Unit.h"
 
 class Unit;
-// #include "../units/Unit.h"
 
 class BaseAttack {
 public:
@@ -14,8 +14,9 @@ public:
 
 	virtual void attack(Unit* attacker, Unit* enemy);
 	virtual void counterAttack(Unit* attacker, Unit* enemy);
-};
+	virtual void convertOther(Unit* enemy);
+	virtual void turnMyselfInto(Unit* self);
 
-std::ostream& operator<<(std::ostream& out, BaseAttack& attack);
+};
 
 #endif // BASEATTACK_H

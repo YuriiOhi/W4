@@ -51,9 +51,8 @@ int main() {
 
 	std::cout << "!" << std::endl;
 	std::cout << forNick << std::endl;
-
-
-
+    
+    
 
 
 

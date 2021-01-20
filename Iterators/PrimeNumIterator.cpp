@@ -40,11 +40,6 @@ void PrimeNumIterator<T>::next() {
     addPrimeNumber();
 }
 
-// template <class T> 
-// void PrimeNumIterator<T>::printSize() {
-//     std::cout << "print size " << primeNumbers->size() << " print currentHighest  " << currentHighest << std::endl; для дэбага
-// }
-
 template <class T> 
 void PrimeNumIterator<T>::operator++() { next(); }
 
@@ -62,7 +57,7 @@ bool PrimeNumIterator<T>::over() {
     if ( currentPrimeNumber < 1 ) {
         throw OutOfRangeException();
     }
-    return currentPrimeNumber > limit;
+    return false;
 }
 
 template <class T> 
@@ -114,5 +109,4 @@ T PrimeNumIterator<T>::operator*() { return value(); }
 
 template class PrimeNumIterator<long int>; // explicit instantiation
 template class PrimeNumIterator<int>; // explicit instantiation
-template class PrimeNumIterator<bool>;
 

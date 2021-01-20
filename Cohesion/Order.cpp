@@ -4,22 +4,18 @@
 int Order::lastId = 0;
 std::list<Order*>Order::orders;
 
-Order::Order(Customer& customer, Item& item) {
+Order::Order(Customer* customer, Item* item) {
 	lastId += 1;
 	this->orderId = lastId;
-	this->customer = &customer;
+	this->customer = customer;
     this->orders.push_back(this);
-    this->addItemToOrder(&item);
+    this->addItemToOrder(item);
 }
 
 Order::~Order() {
     std::cout << "Destructing Order object: " << this->getCustomer() << std::endl;
-    for ( std::list<Item*>::iterator it = this->orderedItems.begin(); it != this->orderedItems.end(); ++it ) {
-        delete(*it);
-    }
     orderedItems.clear();
     this->orders.remove(this);
-    this->customer = nullptr;
 }
 
 const int Order::Order::getId() const {
@@ -52,6 +48,3 @@ std::ostream& operator<<(std::ostream& out, const Order& order) {
     }
     return out;
 }
-
-
-

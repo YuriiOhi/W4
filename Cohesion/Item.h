@@ -19,7 +19,6 @@ class Item {
         Order* order;
     public:
         static std::set<Item*> itemsSet; // тут храню все созданные обьекты Товара
-
     public:
         Item(const char* title, Category* category);
         ~Item();
@@ -28,6 +27,7 @@ class Item {
         const Category& getCategory() const;
         const std::list<Order*>& getOrders() const;
         const std::set<Item*>& getItems() const;
+        void printOrders();
         void addItem(Item* item);
         void addOrder(Order* newOrder);
         void setTitle(const char* title);

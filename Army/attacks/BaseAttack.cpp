@@ -8,9 +8,13 @@ void BaseAttack::attack(Unit* attacker, Unit* enemy) {
 	enemy->counterAttack(attacker);
 };
 void BaseAttack::counterAttack(Unit* attacker, Unit* enemy) {
-	enemy->takePDamage(attacker->getState().getDmg() / 2);
+	enemy->takePDamage(attacker->getState().getDmg() / static_cast<int>(DMG_COEF::FIVE));
 };
 
-std::ostream& operator<<(std::ostream& out, BaseAttack& attack) {
-	return out;
+void BaseAttack::convertOther(Unit* enemy){
+	std::cout << "Dude I can't convert anyone..." << std::endl;
+};
+
+void BaseAttack::turnMyselfInto(Unit* self) {
+	std::cout << "Dude I can't turn myself into anything..." << std::endl;
 };
