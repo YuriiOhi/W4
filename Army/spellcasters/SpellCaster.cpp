@@ -1,8 +1,6 @@
 #include "SpellCaster.h"
 #include "../config.h"
-#include "../states/BaseState.h"
 #include "../states/MagicState.h"
-#include "../attacks/BaseAttack.h"
 #include "../attacks/MagicAttack.h"
 
 SpellCaster::SpellCaster(MagicState* magicState, MagicAttack* magicAttack)

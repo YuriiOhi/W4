@@ -9,7 +9,6 @@
 
 class SpellBook;
 
-
 class Wizard : virtual public SpellCaster {
 	public:
 		Wizard(const std::string& name);
