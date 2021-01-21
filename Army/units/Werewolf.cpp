@@ -9,14 +9,16 @@ Werewolf::Werewolf(const std::string& name)
 Werewolf::~Werewolf() {};
 
 void Werewolf::convertOther(Unit* enemy) {
-	if ( this->uState->isDead()) { return; }
-	if ( enemy->getState().getIsUnDead() ) { return; }
+	this->ensureIsAlive();
+	enemy->ensureIsAlive();
+
+	if ( enemy->getState().getIsWereWolf() ) { return; }
 
 	this->uAttack->convertOther(enemy);
 };
 
 void Werewolf::turnMyselfInto() {
-	if ( this->uState->isDead()) { return; }
+	this->ensureIsAlive();
 
 	this->uAttack->turnMyselfInto(this);
 };

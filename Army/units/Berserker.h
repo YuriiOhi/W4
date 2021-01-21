@@ -8,7 +8,7 @@
 class Berserker : public Unit {
 	public:
 		Berserker(const std::string& name);
-		~Berserker();
+		virtual ~Berserker();
 };
 
 std::ostream& operator<<(std::ostream& out, Berserker& berserker);	

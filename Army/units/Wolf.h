@@ -8,7 +8,7 @@
 class Wolf : public Unit {
 	public:
 		Wolf(const std::string& name);
-		~Wolf();
+		virtual ~Wolf();
 };
 
 std::ostream& operator<<(std::ostream& out, Wolf& wolf);	

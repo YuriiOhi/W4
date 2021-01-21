@@ -4,6 +4,7 @@
 #include <iostream>
 #include "../config.h"
 #include "../units/Unit.h"
+class SpellBook;
 
 class Unit;
 

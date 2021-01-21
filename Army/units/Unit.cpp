@@ -18,32 +18,36 @@ BaseAttack& Unit::getAttack() const {
 	return *(this->uAttack);
 };
 
-void Unit::attack(Unit* enemy) {
+void Unit::ensureIsAlive() {
 	if ( this->uState->isDead()) { return; }
+}
 
+void Unit::attack(Unit* enemy) {
+	this->ensureIsAlive();
+	
 	this->uAttack->attack(this, enemy);
 };
 
 void Unit::counterAttack(Unit* enemy) {
-	if ( this->uState->isDead()) { return; }
+	this->ensureIsAlive();
 
 	this->uAttack->counterAttack(this, enemy);
 };
 
 void Unit::convertOther(Unit* enemy) {
-	if ( this->uState->isDead()) { return; }
+	this->ensureIsAlive();
 
 	this->uAttack->convertOther(enemy);
 };
 
 void Unit::turnMyselfInto() {
-	if ( this->uState->isDead()) { return; }
+	this->ensureIsAlive();
 
 	this->uAttack->turnMyselfInto(this);
 };
 
 void Unit::changeState(BaseState* newState, BaseAttack* newAttack) {
-	if ( this->uState->isDead()) { return; }
+	this->ensureIsAlive();
 
 	std::cout << "I am " << this->getState() << " before changing my state " << " ]" << std::endl;
 
@@ -63,6 +67,13 @@ void Unit::takePDamage(int dmg) {
 void Unit::takeMDamage(int dmg) {
 	this->uState->takeMDamage(dmg);
 };
+
+void Unit::addHP(int hp) {
+	this->ensureIsAlive();
+	
+	this->uState->addHealthPoints(hp);
+};
+
 
 std::ostream& operator<<(std::ostream& out, Unit& unit) {
 	out << "Unit [ " << unit.getState() << " ]" << std::endl;

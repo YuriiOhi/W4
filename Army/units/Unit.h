@@ -19,7 +19,7 @@ class Unit {
 
 		BaseState& getState() const;
 		BaseAttack& getAttack() const;
-
+		void ensureIsAlive();
 		void attack(Unit* enemy);
 		void counterAttack(Unit* enemy);
 		void convertOther(Unit* enemy);
@@ -27,6 +27,7 @@ class Unit {
 		void changeState(BaseState* newState, BaseAttack* newAttack);
 		void takePDamage(int dmg);
 		void takeMDamage(int dmg);
+		void addHP(int hp);
 
 };
 

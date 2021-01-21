@@ -5,6 +5,8 @@
 #include "units/Vampire.h"
 #include "units/Werewolf.h"
 #include "units/Wolf.h"
+#include "spellcasters/Wizard.h"
+
 
 int main() {
 
@@ -14,7 +16,7 @@ int main() {
 	Vampire* v4 = new Vampire("John");
 	Werewolf* w5 = new Werewolf("Bill");
 	Rogue* r6 = new Rogue("Spiridon's Brother");
-
+	Wizard* wZ7 = new Wizard("Wizard");
 
 	std::cout << *s1 << std::endl;
 	std::cout << *r2 << std::endl;
@@ -22,7 +24,7 @@ int main() {
 	std::cout << *v4 << std::endl;
 	std::cout << *w5 << std::endl;
 	std::cout << *r6 << std::endl;
-
+	std::cout << *wZ7 << std::endl;
 
 	std::cout << "---------------- before first attack" << std::endl;
 
@@ -39,8 +41,7 @@ int main() {
 	std::cout << *v4 << std::endl;
 	std::cout << *w5 << std::endl;
 	std::cout << *r6 << std::endl;
-
-
+	std::cout << *wZ7 << std::endl;
 
 	std::cout << "---------------- before vampire attack" << std::endl;
 
@@ -55,7 +56,7 @@ int main() {
 	std::cout << *v4 << std::endl;
 	std::cout << *w5 << std::endl;
 	std::cout << *r6 << std::endl;
-
+	std::cout << *wZ7 << std::endl;
 
 	std::cout << "----------------after vampire attack" << std::endl;
 	
@@ -69,7 +70,7 @@ int main() {
 	std::cout << *v4 << std::endl;
 	std::cout << *w5 << std::endl;
 	std::cout << *r6 << std::endl;
-
+	std::cout << *wZ7 << std::endl;
 
 	std::cout << "----------------after infection" << std::endl;
 
@@ -91,6 +92,11 @@ int main() {
 	std::cout << *v4 << std::endl;
 	std::cout << *w5 << std::endl;
 	std::cout << *r6 << std::endl;
+	std::cout << *wZ7 << std::endl;
+
+	wZ7->cast(r6);
+	std::cout << *r6 << std::endl;
+	std::cout << *wZ7 << std::endl;
 
 
 	delete(s1);

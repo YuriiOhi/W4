@@ -6,7 +6,7 @@
 #include "../states/WerewolfState.h"
 
 
-class WerewolfAttack : virtual public BaseAttack {
+class WerewolfAttack : public BaseAttack {
 	public:
 		WerewolfAttack();
 		virtual ~WerewolfAttack();

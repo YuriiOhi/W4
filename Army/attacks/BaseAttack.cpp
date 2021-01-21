@@ -1,4 +1,5 @@
 #include "BaseAttack.h"
+#include "../spellBook/SpellBook.h"
 
 BaseAttack::BaseAttack() {};
 BaseAttack::~BaseAttack() {};

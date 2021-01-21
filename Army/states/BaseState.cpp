@@ -6,7 +6,7 @@ BaseState::BaseState(int hp, int dmg, const std::string& name) {
 	this->damage = dmg;
 	this->name = new std::string(name);
 	this->isUndead = false;
-	this->isWerewolf = false;
+	this->isWereWolf = false;
 	this->isVampire = false;
 };
 
@@ -34,8 +34,8 @@ bool BaseState::getIsUnDead() const {
 	return this->isUndead;
 };
 
-bool BaseState::getIsWerewolf() const {
-	return this->isWerewolf;
+bool BaseState::getIsWereWolf() const {
+	return this->isWereWolf;
 };
 
 bool BaseState::getIsVampire() const {
@@ -51,11 +51,11 @@ void BaseState::becomeUnDead() {
 };
 
 void BaseState::becomeWerewolf() {
-	this->isUndead = true;
+	this->isWereWolf = true;
 };
 
 void BaseState::becomeVampire() {
-	this->isUndead = true;
+	this->isVampire = true;
 };
 
 void BaseState::checkState() {

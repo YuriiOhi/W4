@@ -9,8 +9,10 @@ Vampire::Vampire(const std::string& name)
 Vampire::~Vampire() {};
 
 void Vampire::convertOther(Unit* enemy) {
-	if ( this->uState->isDead()) { return; }
-	if ( enemy->getState().getIsUnDead() ) { return; }
+	this->ensureIsAlive();
+	enemy->ensureIsAlive();
+
+	if ( enemy->getState().getIsWereWolf() ) { return; }
 
 	this->uAttack->convertOther(enemy);
 };

@@ -11,8 +11,9 @@ class BaseState {
 		int damage;
 		std::string* name;
 		bool isUndead;
-		bool isWerewolf;
+		bool isWereWolf;
 		bool isVampire;
+
 	public:
 		BaseState(int hp, int dmg, const std::string& name); 
 		virtual ~BaseState();
@@ -21,11 +22,12 @@ class BaseState {
 		int getMaxHp() const;
 		int getDmg() const;
 		std::string& getName() const;
-		bool getIsUnDead() const;
-		bool getIsWerewolf() const;
-		bool getIsVampire() const;
 
+		bool getIsUnDead() const;
+		bool getIsWereWolf() const;
+		bool getIsVampire() const;
 		bool isDead();
+
 		void becomeUnDead();
 		void becomeWerewolf();
 		void becomeVampire();

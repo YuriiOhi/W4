@@ -8,7 +8,7 @@
 class Rogue : public Unit {
 public:
 	Rogue(const std::string& name);
-	~Rogue(); 	
+	virtual ~Rogue(); 	
 };
 
 std::ostream& operator<<(std::ostream& out, Rogue& rogue);	
